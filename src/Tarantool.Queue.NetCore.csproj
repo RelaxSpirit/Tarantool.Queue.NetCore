@@ -11,13 +11,16 @@
     <PackageDescription>NETCore library for working with Tarantool queues. Based on the library progaudi.tarantool</PackageDescription>
     <RepositoryUrl>https://github.com/RelaxSpirit/Tarantool.Queue.NetCore</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/RelaxSpirit/Tarantool.Queue.NetCore</PackageProjectUrl>
+    <Title>Tarantool.Queue.NetCore</Title>
+    <PackageTags>Tarantool;Queue;NETCore</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="progaudi.tarantool" Version="0.16.0" />
-    <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
