@@ -1,5 +1,5 @@
 # Tarantool.Queue.NetCore
-NETCore client for working with Tarantool Queue is based on the library [progaudi.tarantool](https://github.com/progaudi/progaudi.tarantool/tree/master).
+NETCore client for working with [Tarantool Queue](https://github.com/tarantool/queue/tree/master) is based on the library [progaudi.tarantool](https://github.com/progaudi/progaudi.tarantool/tree/master).
 
 ## .NET Versions
 Can be used in projects based on .NET 6.0, .NET 7.0, and .NET 8.0
