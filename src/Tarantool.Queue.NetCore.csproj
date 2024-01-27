@@ -5,12 +5,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>$(MSBuildProjectName.Replace(" ", "_").Replace("Tarantool.Queue.NetCore", "Tarantool.Queues"))</RootNamespace>
+    <PackageId>Tarantool.Queue.NetCore</PackageId>
+    <Authors>Dmitry Spirin</Authors>
+    <Version>1.0.0</Version>
+    <PackageDescription>NETCore library for working with Tarantool queues. Based on the library progaudi.tarantool</PackageDescription>
+    <RepositoryUrl>https://github.com/RelaxSpirit/Tarantool.Queue.NetCore</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="progaudi.tarantool" Version="0.16.0" />
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>
