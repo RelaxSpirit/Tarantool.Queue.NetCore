@@ -42,6 +42,15 @@ namespace Tarantool.Queues
             CheckTubeType(QueueType.utubettl);
         }
     }
+
+    public class CustomTubeProducer : TubeProducer<AnyTubeOptions>
+    {
+        public CustomTubeProducer(ITube queueTube) : base(queueTube)
+        {
+            CheckTubeType(QueueType.customtube);
+        }
+    }
+
     public abstract class TubeProducer<TQueueTubeOption> : TubeClient<TQueueTubeOption>, IProducer<TQueueTubeOption>
         where TQueueTubeOption : TubeOptions
     {

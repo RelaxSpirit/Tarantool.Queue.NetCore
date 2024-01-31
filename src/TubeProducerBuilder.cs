@@ -22,15 +22,18 @@ namespace Tarantool.Queues
                 QueueType.limfifottl => (IProducer<TQueueTubeOption>)new LimFiFoTtlTubeProducer(tube),
                 QueueType.utube => (IProducer<TQueueTubeOption>)new UTubeTubeProducer(tube),
                 QueueType.utubettl => (IProducer<TQueueTubeOption>)new UTubeTtlTubeProducer(tube),
-                _ => throw new NotSupportedException(),
+                _ => throw new NotSupportedException($"Tube type '{tube.TubeType}' is not a standard Tarantool Queue type"),
             };
         }
 
-        public async Task<TProducer?> BuildCustomTubeProducer<TProducer>(string queueTubeName)
-            where TProducer : TubeProducer<AnyTubeOptions>
+        public async Task<IProducer<TQueueTubeOption>> BuildCustomTubeProducer<TQueueTubeOption>(string queueTubeName)
+            where TQueueTubeOption : AnyTubeOptions
         {
             var tube = await _queue.GetTube(queueTubeName);
-            return Activator.CreateInstance(typeof(TProducer), tube) as TProducer;
+            if (tube.TubeType != QueueType.customtube)
+                throw new NotSupportedException($"Tube type '{tube.TubeType}' is standard Tarantool Queue type");
+
+            return (IProducer<TQueueTubeOption>) new CustomTubeProducer(tube);
         }
     }
 }

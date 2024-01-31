@@ -31,25 +31,26 @@ namespace TarantoolWriter
             _mainTask = Task.Factory.StartNew(async () =>
             {
                 //var producer = await _tubeProducerBuilder.Build<UTubeTtlTubeOptions>("queue_test_utubettl");
-                var producer = await _tubeProducerBuilder.Build<FiFoTubeOptions>("queue_test_fifo");
+                //var producer = await _tubeProducerBuilder.Build<FiFoTubeOptions>("queue_test_fifo");
+                var producer = await _tubeProducerBuilder.BuildCustomTubeProducer<AnyTubeOptions>("queue_test_custom_tube");
 
-                var produceOptionsArray = new UTubeTtlTubeOptions[]
+                var produceOptionsArray = new AnyTubeOptions[]
                 {
-                    (UTubeTtlTubeOptions) TubeOptions.GetDefaultTubeOptions(QueueType.utubettl, "HL:11"),
-                    (UTubeTtlTubeOptions)TubeOptions.GetDefaultTubeOptions(QueueType.utubettl, "HL:12"),
-                    (UTubeTtlTubeOptions) TubeOptions.GetDefaultTubeOptions(QueueType.utubettl, "HL:13"),
-                    (UTubeTtlTubeOptions)TubeOptions.GetDefaultTubeOptions(QueueType.utubettl, "HL:14"),
-                    (UTubeTtlTubeOptions) TubeOptions.GetDefaultTubeOptions(QueueType.utubettl, "HL:15"),
-                    (UTubeTtlTubeOptions)TubeOptions.GetDefaultTubeOptions(QueueType.utubettl, "HL:16"),
-                    (UTubeTtlTubeOptions) TubeOptions.GetDefaultTubeOptions(QueueType.utubettl, "HL:17"),
-                    (UTubeTtlTubeOptions)TubeOptions.GetDefaultTubeOptions(QueueType.utubettl, "HL:18"),
-                    (UTubeTtlTubeOptions) TubeOptions.GetDefaultTubeOptions(QueueType.utubettl, "HL:19"),
-                    (UTubeTtlTubeOptions)TubeOptions.GetDefaultTubeOptions(QueueType.utubettl, "HL:20")
+                    new(){ {"utube", "'HL:11'" } },
+                    new(){ {"utube", "'HL:12'" } },
+                    new(){ {"utube", "'HL:13'" } },
+                    new(){ {"utube", "'HL:14'" } },
+                    new(){ {"utube", "'HL:15'" } },
+                    new(){ {"utube", "'HL:16'" } },
+                    new(){ {"utube", "'HL:17'" } },
+                    new(){ {"utube", "'HL:18'" } },
+                    new(){ {"utube", "'HL:19'" } },
+                    new(){ {"utube", "'HL:20'" } }
                 };
 
                 var random = new Random(1);
 
-                var maxOptionIndex = produceOptionsArray.Length - 1;
+                var maxOptionIndex = produceOptionsArray.Length -1;
                 var sw = new Stopwatch();
 
                 while (!_cancellationTokenSource.IsCancellationRequested)
@@ -61,10 +62,10 @@ namespace TarantoolWriter
                         var cursorPosition = Console.GetCursorPosition();
                         while (i > 0)
                         {
-                            //var opts = produceOptionsArray[random.Next(0, maxOptionIndex)];
+                            var opts = produceOptionsArray[Math.Min(random.Next(0, produceOptionsArray.Length), maxOptionIndex)];
                             sw.Start();
-                            //var produceTask = await producer.Write($"{DateTime.Now}", opts);
-                            var produceTask = await producer.Write($"{DateTime.Now}");
+                            var produceTask = await producer.Write($"{DateTime.Now}", opts);
+                            //var produceTask = await producer!.Write($"{DateTime.Now}");
                             sw.Stop();
                             i--;
                             int writeCount = MAX_TASK_COUNT - i;

@@ -132,7 +132,7 @@ namespace Tarantool.Queues.Options
 
         public override string ToString()
         {
-            if (this.Any())
+            if (this.Count != 0)
             {
                 var optString = string.Join(", ", this.Select(c => $"{c.Key} = {c.Value}"));
                 return $"{{{optString}}}";

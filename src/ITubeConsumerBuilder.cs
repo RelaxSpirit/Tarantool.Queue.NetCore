@@ -1,13 +1,13 @@
-﻿using Tarantool.Queues.Options;
+﻿using ProGaudi.Tarantool.Client.Model;
+using Tarantool.Queues.Options;
 
 namespace Tarantool.Queues
 {
     public interface ITubeConsumerBuilder
     {
-        Task<IConsumer<TQueueTubeOption>> Build<TQueueTubeOption>(string queueTubeName)
-            where TQueueTubeOption : TubeOptions;
+        Task<IConsumer<TQueueTubeOptions>> Build<TQueueTubeOptions>(string queueTubeName, bool newConnection = false)
+            where TQueueTubeOptions : TubeOptions;
 
-        Task<TConsumer?> BuildCustomTubeConsumer<TConsumer>(string queueTubeName)
-            where TConsumer : TubeConsumer<AnyTubeOptions>;
+        Task<IConsumer<AnyTubeOptions>> BuildCustomTubeConsumer(string queueTubeName, bool newConnection = false);
     }
 }

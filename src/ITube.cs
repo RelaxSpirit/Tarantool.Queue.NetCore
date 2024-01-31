@@ -11,6 +11,7 @@ namespace Tarantool.Queues
         Task<QueueTubeStatistic> GetStatistics();
         Task<TubeTask> Put(string data, TubeOptions opts);
         Task<TubeTask?> Take(int? timeout, CancellationToken cancellationToken);
+        Task<TubeTask?> Take(int? timeout, TubeOptions opts, CancellationToken cancellationToken);
         Task<TubeTask> Ack(ulong taskId);
         Task<TubeTask> Delete(ulong taskId);
         Task<TubeTask> Release(ulong task_id, TubeOptions opts);

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using Tarantool.Queues;
 using Tarantool.Queues.Helpers;
+using Tarantool.Queues.Model;
 using Tarantool.Queues.Options;
 
 namespace TarantoolReader
@@ -27,42 +28,49 @@ namespace TarantoolReader
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _mainTask = Task.Factory.StartNew(async () =>
-            {
-                //var consumer = await _tubeConsumerBuilder.Build<UTubeTtlTubeOptions>("queue_test_utubettl");
-                var consumer = await _tubeConsumerBuilder.Build<FiFoTubeOptions>("queue_test_fifo");
+            var consumersOptionsArray = new AnyTubeOptions[]
+                {
+                    new(){ {"utube", "'HL:11'" } },
+                    new(){ {"utube", "'HL:12'" } },
+                    new(){ {"utube", "'HL:13'" } },
+                    new(){ {"utube", "'HL:14'" } },
+                    new(){ {"utube", "'HL:15'" } },
+                    new(){ {"utube", "'HL:16'" } },
+                    new(){ {"utube", "'HL:17'" } },
+                    new(){ {"utube", "'HL:18'" } },
+                    new(){ {"utube", "'HL:19'" } },
+                    new(){ {"utube", "'HL:20'" } }
+                };
 
+            _mainTask = Task.Factory.StartNew(async() =>
+            {
+                //var consumer1 = await _tubeConsumerBuilder.Build<UTubeTtlTubeOptions>("queue_test_utubettl", true);
+                //var consumer = await _tubeConsumerBuilder.Build<FiFoTubeOptions>("queue_test_fifo");
+
+                //var consumer = await _tubeConsumerBuilder.BuildCustomTubeConsumer("queue_test_custom_tube", true);
+
+                var consumers = consumersOptionsArray.Select(async c => new Consumer(await _tubeConsumerBuilder.BuildCustomTubeConsumer("queue_test_custom_tube", true), c))
+                .Select(t => t.GetAwaiter().GetResult()).ToList();
+
+                consumers.AsParallel().ForAll(async c => await c.StartConsume(_cancellationTokenSource.Token));
+
+                Console.Clear();
                 var cursorPosition = Console.GetCursorPosition();
-                int taskCount = 0;
-                TimeSpan allTime = TimeSpan.Zero;
-                var sw = new Stopwatch();
                 while (!_cancellationTokenSource.IsCancellationRequested)
                 {
                     try
                     {
-                        var consumeResult = await consumer.Consume(null, _cancellationTokenSource.Token);
-
-                        if (consumeResult.Task != null)
-                        {
-                            taskCount++;
-                            var writeDate = DateTime.Parse(consumeResult.Task!.TaskData).ToUniversalTime();
-                            allTime += consumeResult.ConsumeDate - writeDate;
-                            
-                            sw.Start();
-                            await consumeResult.Commit();
-                            sw.Stop();
-
-                            Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top);
-                            Console.Write($"Read - {taskCount} average message queuing time - {allTime / taskCount}, average task completion time {sw.Elapsed / taskCount} ");
-                        }
+                        Console.SetCursorPosition(cursorPosition.Left, cursorPosition.Top);
+                        Console.Write(string.Join(Environment.NewLine, consumers.Select(c => c.ToString())));
+                        await Task.Delay(500, _cancellationTokenSource.Token);
                     }
-                    catch(TaskCanceledException)
+                    catch (TaskCanceledException)
                     {
 
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
-                        _logger.LogError(ex, "Error reading task from queue") ;
+                        _logger.LogError(ex, "Error consume service");
                     }
                     
                 }

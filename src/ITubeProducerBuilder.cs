@@ -6,7 +6,7 @@ namespace Tarantool.Queues
     {
         Task<IProducer<TTubeOptions>> Build<TTubeOptions>(string queueTubeName)
             where TTubeOptions : TubeOptions;
-        Task<TProducer?> BuildCustomTubeProducer<TProducer>(string queueTubeName)
-            where TProducer : TubeProducer<AnyTubeOptions>;
+        Task<IProducer<TTubeOptions>> BuildCustomTubeProducer<TTubeOptions>(string queueTubeName)
+            where TTubeOptions : AnyTubeOptions;
     }
 }

@@ -27,7 +27,8 @@ namespace Tarantool.Queues
         {
             var strRequest = $"return {REQUIRE}.tube.{tubeName}.type";
             var response = await _netBox.Eval<string>(strRequest);
-            var tubeType = Enum.Parse<QueueType>(response.Data[0]);
+            if (!Enum.TryParse<QueueType>(response.Data[0], out var tubeType))
+                tubeType = QueueType.customtube;
 
             strRequest = $"return {REQUIRE}.tube.{tubeName}.opts";
             var optResponse = (await _netBox.Eval<TubeCreationOptions>(strRequest)).Data[0];
@@ -156,6 +157,19 @@ namespace Tarantool.Queues
             {
                 var requestString = $"{_driverCallPath}release_all()";
                 await _parentShema._netBox.Eval<TarantoolTuple>(requestString);
+            }
+
+            public async Task<TubeTask?> Take(int? timeout, TubeOptions opts, CancellationToken cancellationToken)
+            {
+                ArgumentNullException.ThrowIfNull(opts);
+
+                var requestString = $"return {_driverCallPath}take({(timeout?.ToString() ?? "nil")}, {opts})";
+
+                var responseTask = _parentShema._netBox.Eval<TubeTask>(requestString);
+
+                var response = await responseTask.WaitAsync(cancellationToken);
+
+                return response.Data.FirstOrDefault();
             }
         }
     }

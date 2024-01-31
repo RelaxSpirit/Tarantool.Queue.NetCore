@@ -7,7 +7,7 @@ using Tarantool.Queues.Model;
 
 namespace Tarantool.Queues.Options
 {
-    public abstract class AnyTubeOptions : TubeOptions
+    public class AnyTubeOptions : TubeOptions
     {
         public override QueueType QueueType { get; protected set; } = QueueType.customtube;
 
@@ -16,5 +16,10 @@ namespace Tarantool.Queues.Options
 
         }
 
+        protected override void ValidateOptionName(string optionName)
+        {
+        }
+
+        internal static TubeOptions Empty => new AnyTubeOptions();
     }
 }

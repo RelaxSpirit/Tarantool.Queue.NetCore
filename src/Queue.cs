@@ -26,7 +26,10 @@ namespace Tarantool.Queues
             clientOptions.MsgPackContext.RegisterConverter(new QueueStatistic.Converter());
             clientOptions.MsgPackContext.RegisterConverter(new TubeCreationOptions.Converter());
             clientOptions.MsgPackContext.RegisterConverter(new TubeTask.Converter());
+            ClientOptions = clientOptions;
         }
+
+        public ClientOptions ClientOptions { get; }
 
         public async Task<QueueState> GetState()
         {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tarantool.Queues.Model;
+﻿using Tarantool.Queues.Model;
 using Tarantool.Queues.Options;
 
 namespace Tarantool.Queues
@@ -13,10 +8,14 @@ namespace Tarantool.Queues
     {
         protected readonly ITube _queueTube;
         protected readonly TQueueTubeOption _defaultOptions;
+
         protected TubeClient(ITube queueTube)
         {
             _queueTube = queueTube;
-            _defaultOptions = (TQueueTubeOption)TubeOptions.GetDefaultTubeOptions(queueTube.TubeType);
+            if (_queueTube.TubeType != QueueType.customtube)
+                _defaultOptions = (TQueueTubeOption)TubeOptions.GetDefaultTubeOptions(queueTube.TubeType);
+            else
+                _defaultOptions = (TQueueTubeOption)AnyTubeOptions.Empty;
         }
 
         public async Task<QueueTubeStatistic> GetStatistics()

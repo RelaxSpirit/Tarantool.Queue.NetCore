@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using static Tarantool.Queues.Queue;
 using Tarantool.Queues.Options;
 using Tarantool.Queues.Model;
+using ProGaudi.Tarantool.Client.Model;
 
 namespace Tarantool.Queues
 {
@@ -21,5 +22,7 @@ namespace Tarantool.Queues
         Guid SessionUUid { get; }
 
         string Version { get; }
+
+        ClientOptions ClientOptions { get; }
     }
 }
