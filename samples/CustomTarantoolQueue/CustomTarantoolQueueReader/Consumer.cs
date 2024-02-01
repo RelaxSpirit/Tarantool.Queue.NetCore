@@ -25,8 +25,6 @@ namespace TarantoolReader
         {
             _mainTask = Task.Run(async () =>
             {
-
-                ulong lastId = 0;
                 while (!cancellationToken.IsCancellationRequested)
                 {
                     try
@@ -42,8 +40,6 @@ namespace TarantoolReader
                             _sw.Start();
                             await consumeResult.Commit();
                             _sw.Stop();
-
-                            lastId = consumeResult.Task.TaskId!.Value;
                         }
                     }
                     catch (TaskCanceledException)
@@ -76,7 +72,6 @@ namespace TarantoolReader
         public override string ToString()
         {
             var taskCount = Math.Max(_taskCount, 1);
-            //return $"Utube {_options["utube"]}: Read - {_taskCount} average message queuing time - {_allTime / taskCount}, average task completion time {_sw.Elapsed / taskCount}";
             return $"Utube {_options["utube"]}: Read - {_taskCount} AMQT - {_allTime / taskCount}, average ACK time {(_sw.Elapsed / taskCount).TotalSeconds} sec.";
         }
 

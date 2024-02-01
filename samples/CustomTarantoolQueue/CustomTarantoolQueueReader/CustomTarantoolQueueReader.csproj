@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Src\Tarantool.Queue.NetCore.csproj" />
+    <ProjectReference Include="..\..\..\Src\Tarantool.Queue.NetCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
