@@ -25,7 +25,7 @@ Can be used in projects based on .NET 6.0, .NET 7.0, and .NET 8.0
   
 ## Custom Tarantool Queue
 * Linux
-  1. Copy the lua [folder of example files](https://github.com/RelaxSpirit/Tarantool.Queue.NetCore/tree/master/samples/override) to the directory '/home/[your_Linux_user]/override' of your Linux machine where Tarantool and Tarantool Queue are installed.
+  1. Copy the [folder of example lua files](https://github.com/RelaxSpirit/Tarantool.Queue.NetCore/tree/master/samples/override) to the directory '/home/[your_Linux_user]/override' of your Linux machine where Tarantool and Tarantool Queue are installed.
   2. Run Tarantool:
      > tarantool - i
   3. Run netBox:
