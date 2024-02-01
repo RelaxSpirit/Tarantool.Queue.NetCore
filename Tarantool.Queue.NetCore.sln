@@ -5,13 +5,13 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tarantool.Queue.NetCore", "Src\Tarantool.Queue.NetCore.csproj", "{FE530606-6F3B-4149-8614-818EC21F6834}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StandartTarantoolQueueReader", "samples\StandartTarantoolQueue\StandartTarantoolQueueReader\StandartTarantoolQueueReader.csproj", "{9CB70854-38C4-49C5-85AC-21223EA04538}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StandartTarantoolQueueWriter", "samples\StandartTarantoolQueue\StandartTarantoolQueueWriter\StandartTarantoolQueueWriter.csproj", "{FA492793-0A19-45D5-8598-586BFED67B3E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomTarantoolQueueReader", "samples\CustomTarantoolQueue\CustomTarantoolQueueReader\CustomTarantoolQueueReader.csproj", "{2C218999-9B5E-4346-8890-2B61D96492E5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomTarantoolQueueWriter", "samples\CustomTarantoolQueue\CustomTarantoolQueueWriter\CustomTarantoolQueueWriter.csproj", "{78A96306-0A21-4B16-ACCF-B096B4477048}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StandardTarantoolQueueReader", "samples\StandardTarantoolQueue\StandardTarantoolQueueReader\StandardTarantoolQueueReader.csproj", "{8F00CD07-6A81-43A1-8467-3AE64AAF4234}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StandardTarantoolQueueWriter", "samples\StandardTarantoolQueue\StandardTarantoolQueueWriter\StandardTarantoolQueueWriter.csproj", "{579667C8-F9E8-4E04-8B04-C74F61F29DC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,6 @@ Global
 		{FE530606-6F3B-4149-8614-818EC21F6834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE530606-6F3B-4149-8614-818EC21F6834}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE530606-6F3B-4149-8614-818EC21F6834}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CB70854-38C4-49C5-85AC-21223EA04538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CB70854-38C4-49C5-85AC-21223EA04538}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CB70854-38C4-49C5-85AC-21223EA04538}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CB70854-38C4-49C5-85AC-21223EA04538}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA492793-0A19-45D5-8598-586BFED67B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA492793-0A19-45D5-8598-586BFED67B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA492793-0A19-45D5-8598-586BFED67B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA492793-0A19-45D5-8598-586BFED67B3E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C218999-9B5E-4346-8890-2B61D96492E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2C218999-9B5E-4346-8890-2B61D96492E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C218999-9B5E-4346-8890-2B61D96492E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +31,14 @@ Global
 		{78A96306-0A21-4B16-ACCF-B096B4477048}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78A96306-0A21-4B16-ACCF-B096B4477048}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78A96306-0A21-4B16-ACCF-B096B4477048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F00CD07-6A81-43A1-8467-3AE64AAF4234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F00CD07-6A81-43A1-8467-3AE64AAF4234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F00CD07-6A81-43A1-8467-3AE64AAF4234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F00CD07-6A81-43A1-8467-3AE64AAF4234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{579667C8-F9E8-4E04-8B04-C74F61F29DC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{579667C8-F9E8-4E04-8B04-C74F61F29DC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{579667C8-F9E8-4E04-8B04-C74F61F29DC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{579667C8-F9E8-4E04-8B04-C74F61F29DC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
