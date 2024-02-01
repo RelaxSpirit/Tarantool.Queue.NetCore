@@ -43,3 +43,5 @@ Can be used in projects based on .NET 6.0, .NET 7.0, and .NET 8.0
  	2. For [Produce](https://github.com/RelaxSpirit/Tarantool.Queue.NetCore/tree/master/samples/CustomTarantoolQueue/CustomTarantoolQueueWriter)
   7. In projects in the initialization block, replace parameter in function UseTarantoolQueue with your host settings and port.
   8. Run CustomTarantoolQueueReader and CustomTarantoolQueueWriter
+
+The custom Tarantool Queue also supports the full functionality of standard Tarantool Queue queue and tubes.
