@@ -82,10 +82,10 @@ namespace Tarantool.Queues
             }
             public async Task<TubeTask> Put(string data, TubeOptions opts)
             {
-                var optsSting = opts.ToString();
-                if(!string.IsNullOrEmpty(optsSting))
-                    optsSting = $", {optsSting}";
-                var requestString = $"return {_driverCallPath}put('{data}'{optsSting})";
+                var optsString = opts.ToString();
+                if(!string.IsNullOrEmpty(optsString))
+                    optsString = $", {optsString}";
+                var requestString = $"return {_driverCallPath}put('{data}'{optsString})";
                 return await GetTubeTask(requestString);
             }
 
@@ -106,10 +106,10 @@ namespace Tarantool.Queues
 
             public async Task<TubeTask> Release(ulong task_id, TubeOptions opts)
             {
-                var optsSting = opts.ToString();
-                if (!string.IsNullOrEmpty(optsSting))
-                    optsSting = $", {optsSting}";
-                var requestString = $"return {_driverCallPath}release({task_id}{optsSting})";
+                var optsString = opts.ToString();
+                if (!string.IsNullOrEmpty(optsString))
+                    optsString = $", {optsString}";
+                var requestString = $"return {_driverCallPath}release({task_id}{optsString})";
                 return await GetTubeTask(requestString);
             }
 
