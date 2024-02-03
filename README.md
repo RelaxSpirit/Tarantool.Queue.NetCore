@@ -38,10 +38,10 @@ Can be used in projects based on .NET 6.0, .NET 7.0, and .NET 8.0
      > tarantool> queue.register_driver('customtube', require('queuecustom.customutube'))
   6. Create test custom tube if need:
      > tarantool> queue.create_tube('queue_test_custom_tube', 'customtube', {if_not_exists = true, temporary = false})
-  * Use cases are in projects:
+* Use cases are in projects:
  	1. For [Consume](https://github.com/RelaxSpirit/Tarantool.Queue.NetCore/tree/master/samples/CustomTarantoolQueue/CustomTarantoolQueueReader)
  	2. For [Produce](https://github.com/RelaxSpirit/Tarantool.Queue.NetCore/tree/master/samples/CustomTarantoolQueue/CustomTarantoolQueueWriter)
-  7. In projects in the initialization block, replace parameter in function UseTarantoolQueue with your host settings and port.
-  8. Run CustomTarantoolQueueReader and CustomTarantoolQueueWriter
+  3. In projects in the initialization block, replace parameter in function UseTarantoolQueue with your host settings and port.
+  4. Run CustomTarantoolQueueReader and CustomTarantoolQueueWriter
 
 The custom Tarantool Queue also supports the full functionality of standard Tarantool Queue queue and tubes.
