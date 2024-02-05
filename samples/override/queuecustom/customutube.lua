@@ -85,7 +85,7 @@ end
 
 -- unbury several tasks
 function method.kick(self, count)
-    return self.parentTubeRaw:ick(count)
+    return self.parentTubeRaw:kick(count)
 end
 
 -- peek task
