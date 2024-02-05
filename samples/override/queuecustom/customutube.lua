@@ -56,9 +56,19 @@ end
 
 -- put task in space
 function method.put(self, data, opts)
-    local task_id = self.task_id + 1
-    local task = self.space:insert{task_id, state.READY, tostring(opts.utube), data}
-    self.task_id = task_id
+    local max_id
+
+    if box.cfg.memtx_use_mvcc_engine and (not box.is_in_txn()) then
+        box.begin({txn_isolation = 'read-committed'})
+        max_id = self.space.index.task_id:max()
+        box.commit()
+    else
+        max_id = self.space.index.task_id:max()
+    end
+
+    self.task_id = max and max_id[1] > self.task_id and max_id[1] + 1 or self.task_id + 1
+
+    local task = self.space:insert{self.task_id, state.READY, tostring(opts.utube), data}
     self.on_task_change(task, 'put')
     return task
 end
