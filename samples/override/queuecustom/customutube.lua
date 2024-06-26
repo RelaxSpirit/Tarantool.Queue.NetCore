@@ -6,15 +6,6 @@ local method = {}
 
 setmetatable(tube ,{__index = parentTube}) 
 
-    -- check indexes
-    local indexes = {'task_id', 'utube'}
-    for _, index in pairs(indexes) do
-        if space.index[index] == nil then
-            error(string.format('space "%s" does not have "%s" index',
-                    space.name, index))
-        end
-    end
-end
 -- create space
 function tube.create_space(space_name, opts)
     return parentTube.create_space(space_name, opts)
