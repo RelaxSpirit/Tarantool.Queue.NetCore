@@ -109,9 +109,6 @@ end
 function method.touch(self, id, ttr)
     return self.parentTubeRaw:touch(id, ttr)
 end
-    self.space_ready_buffer:delete(id)
-    put_next_ready(self, utube)
-end
 
 -- delete task
 function method.delete(self, id)
