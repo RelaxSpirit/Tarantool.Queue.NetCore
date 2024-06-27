@@ -15,9 +15,18 @@ end
 function tube.new(space, on_task_change, opts)
 	local max_id
     local parentRaw = parentTube.new(space, on_task_change, opts)
-    local commit_func = begin_if_not_in_txn()
-    max_id = space.index.task_id:max()
-	commit_func()
+    local transaction_opts = {}
+    if box.cfg.memtx_use_mvcc_engine then
+        transaction_opts = {txn_isolation = 'read-committed'}
+    end
+
+    if not box.is_in_txn() then
+        box.begin(transaction_opts)
+        max_id = space.index.task_id:max()
+        box.commit()
+    else
+        max_id = space.index.task_id:max()
+    end
 	
     local self = setmetatable({
         space          = space,
